@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { mockBooks } from '../utils/mockData';
+
+// Inline mock data (no import needed)
+const mockBooks = [
+  { id: '1', code: 'BK001', name: 'Sample Book 1', publisher: 'Publisher A', unit_price: 10.00, current_stock: 50, status: 'Available' },
+  { id: '2', code: 'BK002', name: 'Sample Book 2', publisher: 'Publisher B', unit_price: 15.00, current_stock: 0, status: 'Out of Stock' },
+];
 
 function LiveSection() {
   const [books, setBooks] = useState(mockBooks);
   const [restockData, setRestockData] = useState({ quantity: 0, expenditure: 0, date: '' });
 
   const handleRestock = (bookId) => {
-    // Mock action: Simulate restock and update local state
     alert(`Restocked book ${bookId} with ${restockData.quantity} units!`);
     setBooks(books.map(book =>
       book.id === bookId
@@ -17,7 +21,6 @@ function LiveSection() {
   };
 
   const toggleStatus = (bookId) => {
-    // Mock status toggle
     setBooks(books.map(book =>
       book.id === bookId ? { ...book, status: book.status === 'Available' ? 'Out of Stock' : 'Available' } : book
     ));
