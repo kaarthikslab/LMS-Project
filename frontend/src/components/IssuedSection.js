@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { mockIssued } from '../utils/mockData';
+
+// Inline mock data
+const mockIssued = {
+  logs: [
+    { id: '1', date: '2023-10-01', books: { name: 'Sample Book 1' }, quantity: 5, total_price: 50.00 },
+    { id: '2', date: '2023-10-02', books: { name: 'Sample Book 2' }, quantity: 3, total_price: 45.00 },
+  ],
+  totalExpense: 95.00,
+};
 
 function IssuedSection() {
   const [logs, setLogs] = useState(mockIssued.logs);
