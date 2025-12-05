@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: lms-backend
+    env: node
+    rootDir: backend  # Points to backend folder
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: SUPABASE_URL
+        value: your_supabase_url  # Replace with actual
+      - key: SUPABASE_KEY
+        value: your_supabase_anon_key  # Replace with actual
+  - type: web
+    name: lms-frontend
+    env: static
+    rootDir: frontend  # Points to frontend folder
+    buildCommand: npm run build
+    publishDir: build
+    envVars:
+      - key: REACT_APP_SUPABASE_URL
+        value: your_supabase_url
+      - key: REACT_APP_SUPABASE_ANON_KEY
+        value: your_supabase_anon_key
