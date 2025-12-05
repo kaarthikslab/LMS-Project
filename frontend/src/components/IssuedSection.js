@@ -1,37 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import axios from 'axios';
+import { mockIssued } from '../utils/mockData';
 
 function IssuedSection() {
-  const [logs, setLogs] = useState([]);
-  const [totalExpense, setTotalExpense] = useState(0);
-
-  useEffect(() => {
-    fetchIssued();
-  }, []);
-
-  const fetchIssued = async () => {
-    const { data } = await axios.get('http://localhost:5000/api/books/issued');
-    setLogs(data.logs);
-    setTotalExpense(data.totalExpense);
-  };
+  const [logs, setLogs] = useState(mockIssued.logs);
+  const [totalExpense, setTotalExpense] = useState(mockIssued.totalExpense);
 
   return (
     <div className="p-8">
       <h2 className="text-3xl mb-6">Issued Logs</h2>
-      <table className="glass-card w-full">
+      <table className="glass-card w-full table-auto">
         <thead>
-          <tr><th>Date</th><th>Book</th><th>Quantity</th><th>Total Price</th></tr>
+          <tr className="text-left">
+            <th className="p-4">Date</th>
+            <th className="p-4">Book</th>
+            <th className="p-4">Quantity</th>
+            <th className="p-4">Total Price</th>
+          </tr>
         </thead>
         <tbody>
           {logs.map((log) => (
-            <tr key={log.id}>
-              <td>{log.date}</td><td>{log.books.name}</td><td>{log.quantity}</td><td>${log.total_price}</td>
-            </tr>
+            <motion.tr key={log.id} className="hover:bg-blue-100" whileHover={{ scale: 1.02 }}>
+              <td className="p-4">{log.date}</td>
+              <td className="p-4">{log.books.name}</td>
+              <td className="p-4">{log.quantity}</td>
+              <td className="p-4">${log.total_price}</td>
+            </motion.tr>
           ))}
         </tbody>
       </table>
-      <p className="mt-4">Total Expense: ${totalExpense}</p>
+      <div className="mt-6 p-4 glass-card">
+        <p className="text-xl font-bold">Total Expense: ${totalExpense}</p>
+      </div>
     </div>
   );
 }
