@@ -1,28 +1,47 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
-// Inline mock data
-const mockRestocked = [
-  { id: '1', date: '2023-10-01', books: { name: 'Sample Book 1' }, quantity: 20, expenditure: 100.00 },
-  { id: '2', date: '2023-10-03', books: { name: 'Sample Book 2' }, quantity: 10, expenditure: 50.00 },
+const mockBooks = [
+  { id: '1', code: 'BK001', name: 'Sample Book 1', publisher: 'Publisher A' },
+];
+
+const mockLogs = [
+  { date: '2023-10-03', quantity: 10, unitPrice: 15.00, supplier: 'Supplier B' },
+  { date: '2023-10-01', quantity: 20, unitPrice: 10.00, supplier: 'Supplier A' },
 ];
 
 function RestockedSection() {
-  const [logs, setLogs] = useState(mockRestocked);
+  const [selectedBook, setSelectedBook] = useState(null);
 
   return (
-    <div className="p-8">
-      <h2 className="text-3xl mb-6">Restocked Logs</h2>
-      <div className="space-y-4">
-        {logs.map((log) => (
-          <motion.div key={log.id} className="glass-card p-6" whileHover={{ y: -5, boxShadow: '0 0 20px rgba(59, 130, 246, 0.3)' }}>
-            <p className="text-lg font-semibold">Date: {log.date}</p>
-            <p>Book: {log.books.name}</p>
-            <p>Quantity Restocked: {log.quantity}</p>
-            <p>Expenditure: ${log.expenditure}</p>
-          </motion.div>
-        ))}
-      </div>
+    <div className="p-8 ml-64">
+      <h2 className="text-3xl mb-6">Restocked Section</h2>
+      {!selectedBook ? (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {mockBooks.map((book) => (
+            <motion.div key={book.id} className="glass-card p-6 cursor-pointer" whileHover={{ y: -5 }} onClick={() => setSelectedBook(book)}>
+              <h3 className="text-xl font-bold">{book.name}</h3>
+              <p className="text-sm">{book.code}</p>
+              <p className="text-xs">{book.publisher}</p>
+            </motion.div>
+          ))}
+        </div>
+      ) : (
+        <div>
+          <h3 className="text-2xl mb-6">Restocking Log for {selectedBook.name}</h3>
+          <div className="space-y-4">
+            {mockLogs.map((log, index) => (
+              <motion.div key={index} className="glass-card p-6" whileHover={{ y: -5 }}>
+                <p className="text-lg font-bold">{log.date}</p>
+                <p>Quantity: <span className="accent-text">{log.quantity}</span></p>
+                <p>Unit Price: ${log.unitPrice}</p>
+                <p className="text-sm">Supplier: {log.supplier}</p>
+              </motion.div>
+            ))}
+          </div>
+          <button onClick={() => setSelectedBook(null)} className="mt-4 neumorphic-button px-4 py-2">Back</button>
+        </div>
+      )}
     </div>
   );
 }
