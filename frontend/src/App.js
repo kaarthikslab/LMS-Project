@@ -44,7 +44,7 @@ function App() {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -50 }}
         transition={{ duration: 0.3 }}
-        className="pt-24"  // Space for top nav
+        className="pt-24"
       >
         {activeSection === 'dashboard' && <Dashboard />}
         {activeSection === 'live' && <LiveSection />}
