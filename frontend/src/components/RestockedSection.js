@@ -1,6 +1,21 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { mockRestockedBooks, mockRestockedLogs } from '../utils/mockData';
+
+// Inline mock data
+const mockRestockedBooks = [
+  { id: '1', code: 'BK001', name: 'Sample Book 1', publisher: 'Publisher A' },
+  { id: '2', code: 'BK002', name: 'Sample Book 2', publisher: 'Publisher B' },
+];
+
+const mockRestockedLogs = {
+  '1': [
+    { date: '2023-10-03', quantity: 10, unitPrice: 15.00, supplier: 'Supplier B' },
+    { date: '2023-10-01', quantity: 20, unitPrice: 10.00, supplier: 'Supplier A' },
+  ],
+  '2': [
+    { date: '2023-09-20', quantity: 15, unitPrice: 12.00, supplier: 'Supplier C' },
+  ],
+};
 
 function RestockedSection() {
   const [selectedBook, setSelectedBook] = useState(null);
