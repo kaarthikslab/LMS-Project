@@ -3,21 +3,32 @@ import { motion } from 'framer-motion';
 
 const mockBooks = [
   { id: '1', code: 'BK001', name: 'Sample Book 1', publisher: 'Publisher A' },
+  { id: '2', code: 'BK002', name: 'Sample Book 2', publisher: 'Publisher B' },
 ];
 
 const mockDetails = {
-  totalExpenditure: 500.00,
-  logs: [
-    { name: 'Student A', issued: '2023-10-01', due: '2023-10-15', returned: '2023-10-10', status: 'Returned' },
-  ],
+  '1': {
+    totalExpenditure: 500.00,
+    logs: [
+      { name: 'Student A', issued: '2023-10-01', due: '2023-10-15', returned: '2023-10-10', status: 'Returned' },
+      { name: 'Student B', issued: '2023-10-05', due: '2023-10-20', returned: null, status: 'Overdue' },
+    ],
+  },
+  '2': {
+    totalExpenditure: 750.00,
+    logs: [
+      { name: 'Librarian X', issued: '2023-09-15', due: '2023-09-30', returned: '2023-09-28', status: 'Returned' },
+    ],
+  },
 };
 
 function IssuedSection() {
   const [selectedBook, setSelectedBook] = useState(null);
 
   return (
-    <div className="p-8 ml-64">
-      <h2 className="text-3xl mb-6">Issued Section</h2>
+    <div className="p-8 max-w-7xl mx-auto">
+      <h2 className="text-4xl mb-8">Issued Section (Books Currently Out)</h2>
+      <p className="mb-6 text-lg">Track issued books, due dates, and expenditures. Click a tile for distribution details.</p>
       {!selectedBook ? (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {mockBooks.map((book) => (
@@ -30,8 +41,8 @@ function IssuedSection() {
         </div>
       ) : (
         <div>
-          <div className="fixed top-4 right-4 glass-card p-4">
-            <p className="text-lg">Total Expenditure: <span className="accent-text">${mockDetails.totalExpenditure}</span></p>
+          <div className="fixed top-24 right-4 glass-card p-4">
+            <p className="text-lg">Total Expenditure: <span className="accent-text">${mockDetails[selectedBook.id].totalExpenditure}</span></p>
           </div>
           <table className="glass-card w-full mt-16">
             <thead>
@@ -44,12 +55,12 @@ function IssuedSection() {
               </tr>
             </thead>
             <tbody>
-              {mockDetails.logs.map((log, index) => (
+              {mockDetails[selectedBook.id].logs.map((log, index) => (
                 <motion.tr key={index} className="hover:bg-blue-100" whileHover={{ scale: 1.02 }}>
                   <td className="p-4">{log.name}</td>
                   <td className="p-4">{log.issued}</td>
                   <td className="p-4">{log.due}</td>
-                  <td className="p-4">{log.returned}</td>
+                  <td className="p-4">{log.returned || 'N/A'}</td>
                   <td className="p-4 accent-text">{log.status}</td>
                 </motion.tr>
               ))}
