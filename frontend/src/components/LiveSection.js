@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 const mockBooks = [
   { id: '1', code: 'BK001', name: 'Sample Book 1', publisher: 'Publisher A', unit_price: 10.00, current_stock: 50, status: 'Available' },
   { id: '2', code: 'BK002', name: 'Sample Book 2', publisher: 'Publisher B', unit_price: 15.00, current_stock: 0, status: 'Out of Stock' },
+  { id: '3', code: 'BK003', name: 'Sample Book 3', publisher: 'Publisher C', unit_price: 20.00, current_stock: 30, status: 'Available' },
+  { id: '4', code: 'BK004', name: 'Sample Book 4', publisher: 'Publisher D', unit_price: 12.00, current_stock: 10, status: 'Low Stock' },
 ];
 
 function LiveSection() {
@@ -21,8 +23,9 @@ function LiveSection() {
   };
 
   return (
-    <div className="p-8 ml-64">
-      <h2 className="text-3xl mb-6">Live Section</h2>
+    <div className="p-8 max-w-7xl mx-auto">
+      <h2 className="text-4xl mb-8">Live Section (Stock Available)</h2>
+      <p className="mb-6 text-lg">Browse and manage available books. Click a tile for details, toggle status, or restock.</p>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {books.map((book) => (
           <motion.div key={book.id} className="glass-card p-6 cursor-pointer" whileHover={{ y: -5 }} onClick={() => setSelectedBook(book)}>
