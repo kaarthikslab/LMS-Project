@@ -10,8 +10,21 @@ function Dashboard() {
   ];
 
   return (
-    <div className="p-8 ml-64">
-      <h2 className="text-3xl mb-6">Dashboard</h2>
+    <div className="p-8 max-w-7xl mx-auto">
+      <h2 className="text-4xl mb-8 text-center">Dashboard</h2>
+      {/* Image Placeholders */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <motion.div className="image-placeholder" whileHover={{ y: -5 }}>
+          <span>Image Placeholder 1 (e.g., Book Cover)</span>
+        </motion.div>
+        <motion.div className="image-placeholder" whileHover={{ y: -5 }}>
+          <span>Image Placeholder 2 (e.g., Library Photo)</span>
+        </motion.div>
+        <motion.div className="image-placeholder" whileHover={{ y: -5 }}>
+          <span>Image Placeholder 3 (e.g., Stats Chart)</span>
+        </motion.div>
+      </div>
+      {/* KPI Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {kpis.map((kpi, index) => (
           <motion.div key={index} className="glass-card p-6 text-center" whileHover={{ y: -5 }}>
