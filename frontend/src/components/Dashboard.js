@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-// Inline mock data
 const mockKPIs = [
   { label: 'Total Books', value: 150 },
   { label: 'Total Issued', value: 45 },
