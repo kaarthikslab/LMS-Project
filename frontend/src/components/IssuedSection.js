@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
-// Inline mock data
 const mockIssuedBooks = [
   { id: '1', code: 'BK001', name: 'Sample Book 1', publisher: 'Publisher A' },
   { id: '2', code: 'BK002', name: 'Sample Book 2', publisher: 'Publisher B' },
