@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import Header from './components/Header';
 import Dashboard from './components/Dashboard';
 import LiveSection from './components/LiveSection';
 import IssuedSection from './components/IssuedSection';
@@ -23,13 +22,29 @@ function App() {
 
   return (
     <div className="min-h-screen">
-      <Header setActiveSection={setActiveSection} />
+      <nav className="top-nav">
+        <div className="flex justify-between items-center max-w-7xl mx-auto">
+          <h1 className="text-3xl font-bold text-white">LMS</h1>
+          <div className="flex space-x-6">
+            {['dashboard', 'live', 'issued', 'restocked'].map((section) => (
+              <button
+                key={section}
+                onClick={() => setActiveSection(section)}
+                className="px-6 py-3 neumorphic-button text-white text-lg font-semibold rounded-lg hover:scale-105"
+              >
+                {section.charAt(0).toUpperCase() + section.slice(1)}
+              </button>
+            ))}
+          </div>
+        </div>
+      </nav>
       <motion.div
         key={activeSection}
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        exit={{ opacity: 0, x: -50 }}
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -50 }}
         transition={{ duration: 0.3 }}
+        className="pt-24"  // Space for top nav
       >
         {activeSection === 'dashboard' && <Dashboard />}
         {activeSection === 'live' && <LiveSection />}
